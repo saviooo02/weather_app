@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 
 function App() {
+  const apiKey1 = import.meta.env.VITE_WEATHER_API_KEY;
+  const apiKey2 = import.meta.env.VITE_BACKGROUND_API_KEY;
+
   const [city, setCity] = useState("Kochi");
   const [newCity, setNewCity] = useState("Kochi");
   const [result, setResult] = useState(null); 
@@ -17,7 +20,7 @@ function App() {
 
   useEffect(() => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3533d24e9942abfdd68503c92176635a`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey1}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -29,7 +32,7 @@ function App() {
   useEffect(() => {
     if (result && result.weather) {
       fetch(
-        `https://pixabay.com/api/videos/?key=46494219-7734c2445b2ca3c5c4161d3f1&q=${result.weather[0].description}`
+        `https://pixabay.com/api/videos/?key=${apiKey2}&q=${result.weather[0].description}`
       )
         .then((res) => res.json())
         .then((data) => {
